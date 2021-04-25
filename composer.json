@@ -1,48 +1,42 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "laravel-macros/eloquent-insert-as-model",
+    "description": "Add `insertAsModel` macro to Eloquent Builder. Unlike `insert`, `insertAsModel` method will ensure that all inserted values will go through models' casts and mutators.",
     "keywords": [
-        ":vendor_name",
-        "laravel",
-        "package_slug"
+        "Laravel",
+        "Macro",
+        "Eloquent"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/laravel-macros/eloquent-insert-as-model",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mohannad Najjar",
+            "email": "mohannadnaj@me.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.0"
+        "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0"
     },
     "require-dev": {
-        "brianium/paratest": "^6.2",
-        "nunomaduro/collision": "^5.3",
+        "friendsofphp/php-cs-fixer": "dev-master",
         "orchestra/testbench": "^6.15",
-        "phpunit/phpunit": "^9.3",
-        "spatie/laravel-ray": "^1.9",
-        "vimeo/psalm": "^4.4"
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "LaravelMacros\\Eloquent\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "LaravelMacros\\Eloquent\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
-        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "./vendor/bin/phpunit",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
         "sort-packages": true
@@ -50,11 +44,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
-            }
+                "LaravelMacros\\Eloquent\\InsertAsModelServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",

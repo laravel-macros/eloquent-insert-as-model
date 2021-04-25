@@ -1,64 +1,64 @@
-# :package_description
+# Laravel Macros: Eloquent | `insertAsModel`
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vendor_slug/package_slug.svg?style=flat-square)](https://packagist.org/packages/vendor_slug/package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/vendor_slug/package_slug/run-tests?label=tests)](https://github.com/vendor_slug/package_slug/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/vendor_slug/package_slug/Check%20&%20fix%20styling?label=code%20style)](https://github.com/vendor_slug/package_slug/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/vendor_slug/package_slug.svg?style=flat-square)](https://packagist.org/packages/vendor_slug/package_slug)
+This package will add `insertAsModel` macro to Laravel's Eloquent Builder class.
 
-[](delete) 1) manually replace `:author_name, :author_username, auhor@domain.com, :vendor_name, vendor_slug, Vendor Name, :package_name, package_slug, skeleton, Skeleton, :package_description` with their correct values
-[](delete) in `CHANGELOG.md, LICENSE.md, README.md, ExampleTest.php, ModelFactory.php, Skeleton.php, SkeletonCommand.php, SkeletonFacade.php, SkeletonServiceProvider.php, TestCase.php, composer.json, create_skeleton_table.php.stub`
-[](delete) and delete `configure-skeleton.sh`
+Unlike `insert`, `insertAsModel` method will ensure that all inserted values will go through models' casts and mutators then it will just pass it to the `insert` method.
 
-[](delete) 2) You can also run `./configure-skeleton.sh` to do this automatically.
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/package-skeleton-laravel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/package-skeleton-laravel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-macros/eloquent-insert-as-model.svg?style=flat-square)](https://packagist.org/packages/laravel-macros/eloquent-insert-as-model)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/run-tests?label=tests)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/Check%20&%20fix%20styling?label=code%20style)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-macros/eloquent-insert-as-model.svg?style=flat-square)](https://packagist.org/packages/laravel-macros/eloquent-insert-as-model)
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require vendor_slug/package_slug
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="VendorName\Skeleton\SkeletonServiceProvider" --tag="package_slug-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="VendorName\Skeleton\SkeletonServiceProvider" --tag="package_slug-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+composer require laravel-macros/eloquent-insert-as-model
 ```
 
 ## Usage
 
-```php
-$skeleton = new VendorName\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+Assuming you have:
+
+``` php
+class User extends Model
+{
+     protected $casts = [
+        'options' => 'json',
+        'shelf'   => 'collection',
+    ];
+}
 ```
+
+Normally if you will use the `Model::insert` method to insert a batch of entries, casts and mutators will be ignored and you will have to stringify the values yourself.
+
+Using this package, you can insert values the same way you use `Model::create`, where all the proper casting and mutating logic will be applied.
+
+``` php
+User::insertAsModel([
+    [
+        'options' => ['sms' => true],
+        'shelf'   => collect(['book1', 'book2', 'book3']),
+    ],
+    [
+        'options' => ['sms' => false],
+        'shelf'   => collect(['book1', 'book2']),
+    ],
+]);
+```
+
+This will prevent you from doing hacks like `'options' => json_encode(['sms' => true])`.
+
+> Note: `insertAsModel` is not a multiple `create` calls. It will insert entries directly to the database (just like `insert`). For example it won't fire models events.
 
 ## Testing
 
 ```bash
 composer test
+
+# Test Coverage with XDebug enabled
+composer test-coverage
 ```
 
 ## Changelog
@@ -75,7 +75,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Mohannad Najjar](https://github.com/MohannadNaj)
 - [All Contributors](../../contributors)
 
 ## License
