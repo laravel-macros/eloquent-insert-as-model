@@ -52,5 +52,10 @@ class InsertAsModelServiceProvider extends ServiceProvider
                 ->toArray()
             );
         });
+
+        Builder::macro('insertAsModels', function (array $values) {
+            /** @var Builder $this */
+            return $this->insertAsModel($values);
+        });
     }
 }

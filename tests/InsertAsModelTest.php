@@ -30,7 +30,7 @@ class InsertAsModelTest extends TestCase
     /** @test */
     public function it_handles_mutated_attributes()
     {
-        User::insertAsModel([
+        User::insertAsModels([
             [
                 'username' => 'Mohannad Naj',
             ],
@@ -51,7 +51,7 @@ class InsertAsModelTest extends TestCase
     /** @test */
     public function it_handles_insert_with_single_entry()
     {
-        User::insertAsModel([
+        User::insertAsModels([
             'username' => 'Mohannad Naj',
         ]);
 
