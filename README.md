@@ -5,8 +5,8 @@ This package will add `insertAsModel` macro to Laravel's Eloquent Builder class.
 Unlike `insert`, `insertAsModel` method will ensure that all inserted values will go through models' casts and mutators then it will just pass it to the `insert` method.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-macros/eloquent-insert-as-model.svg?style=flat-square)](https://packagist.org/packages/laravel-macros/eloquent-insert-as-model)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/run-tests?label=tests)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/Check%20&%20fix%20styling?label=code%20style)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/run-tests?label=tests)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/laravel-macros/eloquent-insert-as-model/Check%20&%20fix%20styling?label=code%20style)](https://github.com/laravel-macros/eloquent-insert-as-model/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-macros/eloquent-insert-as-model.svg?style=flat-square)](https://packagist.org/packages/laravel-macros/eloquent-insert-as-model)
 
 ## Installation
